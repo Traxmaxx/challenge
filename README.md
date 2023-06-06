@@ -3,6 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Clone the repo `git clone git@github.com:Traxmaxx/challenge.git` and CD into the directory.
+
 I set `.node-version` to `18.12.1`. Feel free to change in case you're using a different version and your node version manager screams
 
 If everything is fine, run `npm install` to install all the dependencies.
@@ -32,7 +33,7 @@ I used TypeScript to have strict typing. I used `type` instead of `interface` to
 ### Structure
     - public: contains images and some default assets
     - src:
-        - components: Contains reusable components
+        - components: Contains reusable components (storybook would be a good addition to this folder)
         - helpers: contains a small api helper and data formatting helpers for charting
         - routes: contains all main site templates
         - styles: contains all css files, structure reflects components (styled components are a great way to avoid this duplication and move the CSS closer to TS)
