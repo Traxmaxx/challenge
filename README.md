@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Tailwarden Challenge
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Clone the repo `git clone git@github.com:Traxmaxx/challenge.git` and CD into the directory.
+I set `.node-version` to `18.12.1`. Feel free to change in case you're using a different version and your node version manager screams
+
+If everything is fine, run `npm install` to install all the dependencies.
 
 ## Available Scripts
 
@@ -11,36 +16,42 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
-### `npm run build`
+I ignored the `eject` and `build` commands for now.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Thoughts and considerations
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I used TypeScript to have strict typing. I used `type` instead of `interface` to have proper name collision.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Structure
+    - public: contains images and some default assets
+    - src:
+        - components: Contains reusable components
+        - helpers: contains a small api helper and data formatting helpers for charting
+        - routes: contains all main site templates
+        - styles: contains all css files, structure reflects components (styled components are a great way to avoid this duplication and move the CSS closer to TS)
+        - types: contains TS types for the API responses
+        - index.ts: The app entry point
+    - .prettierrc: I use prettier to help me having consistent formatting
 
-### `npm run eject`
+### Technologies and Libs
+I use simple CSS with `className`. A better alternative would be Tailwind or similar when having more time. Charts are rendered with `chart.js` primarily because I noticed it's being used by komiser and I was curious. It's using a plugin for auto themes.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Instead of using an error boundary I should check the API specs and implement proper error handline that way. If an OpenAPI schema is created, I could [autogenerate](https://swagger.io/tools/swagger-codegen/) some of the API client and TS types.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I added tests for the helpers and one React component. However there seems to be some [changes in React 18](https://github.com/testing-library/react-testing-library/issues/1216) and I didn't have the time to dig deeper. So the component test complains about an error but passes? It's interesting, will figure out later what's going on.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+I ran into [this](https://github.com/reactchartjs/react-chartjs-2/issues/90) issue with the charting library. As a workaround I pass down the selected account for the `key` property so the charts update properly.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+Links and libraries:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[react-chartjs-2](https://github.com/reactchartjs/react-chartjs-2) for charting.
+[lodash](https://lodash.com/) for potentially helpful functions
+[react-error-boundary](https://github.com/bvaughn/react-error-boundary), since we do not do any heavy lifting yet,  we want to allow a user to restart the app on error.

@@ -1,0 +1,14 @@
+{
+    "jsxSingleQuote": true,
+    "printWidth": 120,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "overrides": [
+        {
+            "files": ["package.json", "package-lock.json"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+.costs-widget {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 10px;
+    gap: 10px;
+}
+.costs-widget .costs-widget-values {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    text-align: right;
+}
+.costs-widget .costs-widget-values h4 {
+    text-transform: capitalize;
+}
+.costs-widget .costs-widget-values span {
+    font-size: 1rem;
+}
