@@ -52,7 +52,6 @@ I ran into [this](https://github.com/reactchartjs/react-chartjs-2/issues/90) iss
 
 
 Links and libraries:
-
-[react-chartjs-2](https://github.com/reactchartjs/react-chartjs-2) for charting.
-[lodash](https://lodash.com/) for potentially helpful functions
-[react-error-boundary](https://github.com/bvaughn/react-error-boundary), since we do not do any heavy lifting yet,  we want to allow a user to restart the app on error.
+- [react-chartjs-2](https://github.com/reactchartjs/react-chartjs-2) for charting.
+- [lodash](https://lodash.com/) for potentially helpful functions
+- [react-error-boundary](https://github.com/bvaughn/react-error-boundary), since we do not do any heavy lifting yet,  we want to allow a user to restart the app on error.
