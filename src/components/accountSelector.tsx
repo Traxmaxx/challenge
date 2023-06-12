@@ -45,12 +45,17 @@ export const AccountSelector = memo(function AccountSelector(props: AccountSelec
         <div className='account-selector-wrapper'>
             <div>
                 <label htmlFor='account-selector'>Account:</label>
-                <select onChange={onChangeHandler} defaultValue='' id='account-selector'>
-                    <option value='' disabled>
+                <select
+                    onChange={onChangeHandler}
+                    defaultValue=''
+                    className='account-selector'
+                    data-testid='account-selector'
+                >
+                    <option value='' disabled data-testid='option'>
                         Choose an account
                     </option>
                     {accounts.map((opt) => (
-                        <option key={opt.id} value={opt.id}>
+                        <option key={opt.id} value={opt.id} data-testid='option'>
                             {opt.provider} - {opt.label}
                         </option>
                     ))}

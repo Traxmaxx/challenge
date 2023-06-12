@@ -43,13 +43,11 @@ export function extractUniqueCostGroups(historyData: CloudAccountHistory[]) {
 }
 
 export function extractCostGroupValues(historyData: CloudAccountHistory[], costGroup: string) {
-    // 
     const extractedCostGroups: number[] = [];
     const costGroups = historyData.map((entry) => {
         return entry.groups;
     });
 
-    // 
     costGroups.forEach((group) => {
         return group.forEach((costs) => {
             if (costs.key === costGroup) {

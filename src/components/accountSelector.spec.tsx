@@ -1,5 +1,6 @@
 import { useErrorBoundary, ErrorBoundary } from 'react-error-boundary';
-import { render, screen, act, waitFor } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { AccountSelector } from './accountSelector';
 
 const ErrorFallback = ({ error }: { error: Error }) => {
@@ -38,21 +39,42 @@ afterEach(() => {
 
 const onSelect = jest.fn().mockResolvedValue('selected!');
 
-test('renders learn react link', async () => {
+test('renders account dropdown', async () => {
     jest.useFakeTimers();
 
-    render(
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <AccountSelector onSelect={onSelect} />
-        </ErrorBoundary>
-    );
-
-    act(() => {
-        jest.runOnlyPendingTimers();
-        // jest.runAllTimers();
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+        render(
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <AccountSelector onSelect={onSelect} />
+            </ErrorBoundary>
+        );
     });
 
-    await waitFor(() => {
-        expect(screen.getByText(/Account:/i)).toBeInTheDocument();
+    jest.runOnlyPendingTimers();
+
+    expect(screen.getByText(/Choose an account/i)).toBeInTheDocument();
+});
+
+test('allows to select an option fetched during render', async () => {
+    jest.useFakeTimers();
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+        render(
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <AccountSelector onSelect={onSelect} />
+            </ErrorBoundary>
+        );
     });
+
+    jest.runOnlyPendingTimers();
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+        userEvent.selectOptions(screen.getByTestId('account-selector'), ['AWS - production']);
+    });
+
+    const options = screen.getAllByTestId('option') as HTMLOptionElement[];
+    expect(options[1].selected).toBeTruthy();
 });
