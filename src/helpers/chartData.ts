@@ -10,7 +10,6 @@ export function extractDateLabels(historyData: CloudAccountHistory[]) {
 }
 
 export function extractBarChartDataSets(historyData: CloudAccountHistory[]) {
-    const datasets: Array<{ label: string; data: number[] }> = [];
     // extract all cost groups used for stacking the bars
     const uniqueCostGroups = extractUniqueCostGroups(historyData);
 
