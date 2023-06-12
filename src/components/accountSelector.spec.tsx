@@ -42,16 +42,15 @@ const onSelect = jest.fn().mockResolvedValue('selected!');
 test('renders account dropdown', async () => {
     jest.useFakeTimers();
 
-    // eslint-disable-next-line testing-library/no-unnecessary-act
+    render(
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <AccountSelector onSelect={onSelect} />
+        </ErrorBoundary>
+    );
+    
     await act(async () => {
-        render(
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <AccountSelector onSelect={onSelect} />
-            </ErrorBoundary>
-        );
+        jest.runOnlyPendingTimers();
     });
-
-    jest.runOnlyPendingTimers();
 
     expect(screen.getByText(/Choose an account/i)).toBeInTheDocument();
 });
@@ -59,16 +58,15 @@ test('renders account dropdown', async () => {
 test('allows to select an option fetched during render', async () => {
     jest.useFakeTimers();
 
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-        render(
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <AccountSelector onSelect={onSelect} />
-            </ErrorBoundary>
-        );
-    });
+    render(
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <AccountSelector onSelect={onSelect} />
+        </ErrorBoundary>
+    );
 
-    jest.runOnlyPendingTimers();
+    await act(async () => {
+        jest.runOnlyPendingTimers();
+    })
 
     // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
